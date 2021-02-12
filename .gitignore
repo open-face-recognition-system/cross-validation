@@ -194,4 +194,10 @@ pip-selfcheck.json
 .history
 .ionide
 
+### Database init
+database.ini
+
+### Dataset folder
+dataset
+
 # End of https://www.toptal.com/developers/gitignore/api/python,venv,visualstudiocode,macos
