@@ -5,7 +5,7 @@ from config import config
 
 
 def download_photos(student_id, photo_id, photo_path, photo_type):
-    main_path = "dataset/tmp/"
+    main_path = "dataset"
     url = "https://ofrs-files.nyc3.digitaloceanspaces.com/photos/" + photo_path
     filename = student_id + "-" + photo_id
     response = requests.get(url, allow_redirects=True)
@@ -13,10 +13,9 @@ def download_photos(student_id, photo_id, photo_path, photo_type):
     if not os.path.exists(main_path + student_id):
         os.makedirs(main_path + student_id)
 
-    if not os.path.exists(main_path + student_id + "/" + photo_type):
-        os.makedirs(main_path + student_id + "/" + photo_type)
-
-    open(main_path + student_id + "/" + photo_type + "/" + filename + ".jpg", 'wb').write(response.content)
+    if not os.path.exists(f"{main_path + student_id}/{photo_type}"):
+        os.makedirs(f"{main_path + student_id}/{photo_type}")
+    open(f"{main_path + student_id}/{photo_type}/{filename}.jpg", 'wb').write(response.content)
 
 
 def find_all_student_photos(cur, student_id):

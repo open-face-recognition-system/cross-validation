@@ -46,7 +46,6 @@ class Validator:
 
     def create_kfolds(self):
         print("Separando os grupos")
-
         dataset = []
 
         for student_id_folder in self.paths:
