@@ -10,20 +10,20 @@ def download_photos(student_id, photo_id, photo_path, photo_type):
     filename = student_id + "-" + photo_id
     response = requests.get(url, allow_redirects=True)
 
-    if not os.path.exists(main_path + student_id):
-        os.makedirs(main_path + student_id)
+    if not os.path.exists(f"{main_path}/{student_id}"):
+        os.makedirs(f"{main_path}/{student_id}")
 
-    if not os.path.exists(f"{main_path + student_id}/{photo_type}"):
-        os.makedirs(f"{main_path + student_id}/{photo_type}")
-    open(f"{main_path + student_id}/{photo_type}/{filename}.jpg", 'wb').write(response.content)
+    if not os.path.exists(f"{main_path}/{student_id}/{photo_type}"):
+        os.makedirs(f"{main_path}/{student_id}/{photo_type}")
+    open(f"{main_path}/{student_id}/{photo_type}/{filename}.jpg", 'wb').write(response.content)
 
 
 def find_all_student_photos(cur, student_id):
     cur.execute(
         'SELECT photos.id, photos.path, photos."photoType" FROM photos WHERE student_id = ' + student_id)
     photos = cur.fetchall()
+    print("Download all photos from student: " + str(student_id))
     for photo in photos:
-        print("Download all photos from student: " + str(student_id))
         download_photos(student_id, str(photo[0]), photo[1], photo[2])
 
 
