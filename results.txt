@@ -1,0 +1,300 @@
+TESTE: stratified 
+GRUPO: 35 | FOTOS POR ALUNO: 30 
+Eigenfaces 
+Accuracy: 0.9131428571428571 
+Precision: 0.9131428571428571 
+Recall: 0.9131428571428571 
+Fisherfaces 
+Accuracy: 0.7474285714285716 
+Precision: 0.7474285714285716 
+Recall: 0.7474285714285716 
+LBPH 
+Accuracy: 0.9828571428571429 
+Precision: 0.9828571428571429 
+Recall: 0.9828571428571429 
+================================================================
+TESTE: stratified 
+GRUPO: 35 | FOTOS POR ALUNO: 15 
+Eigenfaces 
+Accuracy: 0.8780952380952382 
+Precision: 0.8780952380952382 
+Recall: 0.8780952380952382 
+Fisherfaces 
+Accuracy: 0.7238095238095239 
+Precision: 0.7238095238095239 
+Recall: 0.7238095238095239 
+LBPH 
+Accuracy: 0.9657142857142856 
+Precision: 0.9657142857142856 
+Recall: 0.9657142857142856 
+================================================================
+TESTE: stratified 
+GRUPO: 35 | FOTOS POR ALUNO: 10 
+Eigenfaces 
+Accuracy: 0.9 
+Precision: 0.9 
+Recall: 0.9 
+Fisherfaces 
+Accuracy: 0.8771428571428572 
+Precision: 0.8771428571428572 
+Recall: 0.8771428571428572 
+LBPH 
+Accuracy: 0.9685714285714286 
+Precision: 0.9685714285714286 
+Recall: 0.9685714285714286 
+================================================================
+TESTE: stratified 
+GRUPO: 35 | FOTOS POR ALUNO: 5 
+Eigenfaces 
+Accuracy: 0.8914285714285715 
+Precision: 0.8914285714285715 
+Recall: 0.8914285714285715 
+Fisherfaces 
+Accuracy: 0.8685714285714287 
+Precision: 0.8685714285714287 
+Recall: 0.8685714285714287 
+LBPH 
+Accuracy: 0.9657142857142856 
+Precision: 0.9657142857142856 
+Recall: 0.9657142857142856 
+================================================================
+TESTE: stratified 
+GRUPO: 15 | FOTOS POR ALUNO: 30 
+Eigenfaces 
+Accuracy: 0.9199999999999999 
+Precision: 0.9199999999999999 
+Recall: 0.9199999999999999 
+Fisherfaces 
+Accuracy: 0.9386666666666669 
+Precision: 0.9386666666666669 
+Recall: 0.9386666666666669 
+LBPH 
+Accuracy: 0.9786666666666667 
+Precision: 0.9786666666666667 
+Recall: 0.9786666666666667 
+================================================================
+TESTE: stratified 
+GRUPO: 15 | FOTOS POR ALUNO: 15 
+Eigenfaces 
+Accuracy: 0.9066666666666666 
+Precision: 0.9066666666666666 
+Recall: 0.9066666666666666 
+Fisherfaces 
+Accuracy: 0.9066666666666666 
+Precision: 0.9066666666666666 
+Recall: 0.9066666666666666 
+LBPH 
+Accuracy: 0.96 
+Precision: 0.96 
+Recall: 0.96 
+================================================================
+TESTE: stratified 
+GRUPO: 15 | FOTOS POR ALUNO: 10 
+Eigenfaces 
+Accuracy: 0.9199999999999999 
+Precision: 0.9199999999999999 
+Recall: 0.9199999999999999 
+Fisherfaces 
+Accuracy: 0.9333333333333332 
+Precision: 0.9333333333333332 
+Recall: 0.9333333333333332 
+LBPH 
+Accuracy: 0.9666666666666668 
+Precision: 0.9666666666666668 
+Recall: 0.9666666666666668 
+================================================================
+TESTE: stratified 
+GRUPO: 15 | FOTOS POR ALUNO: 5 
+Eigenfaces 
+Accuracy: 0.9600000000000002 
+Precision: 0.9600000000000002 
+Recall: 0.9600000000000002 
+Fisherfaces 
+Accuracy: 0.9333333333333332 
+Precision: 0.9333333333333332 
+Recall: 0.9333333333333332 
+LBPH 
+Accuracy: 0.9600000000000002 
+Precision: 0.9600000000000002 
+Recall: 0.9600000000000002 
+================================================================
+TESTE: stratified 
+GRUPO: 5 | FOTOS POR ALUNO: 30 
+Eigenfaces 
+Accuracy: 0.968 
+Precision: 0.968 
+Recall: 0.968 
+Fisherfaces 
+Accuracy: 0.968 
+Precision: 0.968 
+Recall: 0.968 
+LBPH 
+Accuracy: 1.0 
+Precision: 1.0 
+Recall: 1.0 
+================================================================
+TESTE: stratified 
+GRUPO: 5 | FOTOS POR ALUNO: 15 
+Eigenfaces 
+Accuracy: 0.9600000000000002 
+Precision: 0.9600000000000002 
+Recall: 0.9600000000000002 
+Fisherfaces 
+Accuracy: 0.9866666666666667 
+Precision: 0.9866666666666667 
+Recall: 0.9866666666666667 
+LBPH 
+Accuracy: 1.0 
+Precision: 1.0 
+Recall: 1.0 
+================================================================
+TESTE: stratified 
+GRUPO: 5 | FOTOS POR ALUNO: 10 
+Eigenfaces 
+Accuracy: 0.96 
+Precision: 0.96 
+Recall: 0.96 
+Fisherfaces 
+Accuracy: 1.0 
+Precision: 1.0 
+Recall: 1.0 
+LBPH 
+Accuracy: 1.0 
+Precision: 1.0 
+Recall: 1.0 
+================================================================
+TESTE: stratified 
+GRUPO: 5 | FOTOS POR ALUNO: 5 
+Eigenfaces 
+Accuracy: 0.96 
+Precision: 0.96 
+Recall: 0.96 
+Fisherfaces 
+Accuracy: 0.96 
+Precision: 0.96 
+Recall: 0.96 
+LBPH 
+Accuracy: 1.0 
+Precision: 1.0 
+Recall: 1.0 
+================================================================
+TESTE: all 
+GRUPO: all | FOTOS POR ALUNO: 30 
+Eigenfaces 
+Accuracy: 0.9050505050505052 
+Precision: 0.9050505050505052 
+Recall: 0.9050505050505052 
+Fisherfaces 
+Accuracy: 0.7818181818181819 
+Precision: 0.7818181818181819 
+Recall: 0.7818181818181819 
+LBPH 
+Accuracy: 0.9818181818181818 
+Precision: 0.9818181818181818 
+Recall: 0.9818181818181818 
+================================================================
+TESTE: all 
+GRUPO: all | FOTOS POR ALUNO: 15 
+Eigenfaces 
+Accuracy: 0.9070707070707071 
+Precision: 0.9070707070707071 
+Recall: 0.9070707070707071 
+Fisherfaces 
+Accuracy: 0.7787878787878787 
+Precision: 0.7787878787878787 
+Recall: 0.7787878787878787 
+LBPH 
+Accuracy: 0.9797979797979798 
+Precision: 0.9797979797979798 
+Recall: 0.9797979797979798 
+================================================================
+TESTE: all 
+GRUPO: all | FOTOS POR ALUNO: 10 
+Eigenfaces 
+Accuracy: 0.9161616161616163 
+Precision: 0.9161616161616163 
+Recall: 0.9161616161616163 
+Fisherfaces 
+Accuracy: 0.7464646464646465 
+Precision: 0.7464646464646465 
+Recall: 0.7464646464646465 
+LBPH 
+Accuracy: 0.9777777777777779 
+Precision: 0.9777777777777779 
+Recall: 0.9777777777777779 
+================================================================
+TESTE: all 
+GRUPO: all | FOTOS POR ALUNO: 5 
+Eigenfaces 
+Accuracy: 0.9111111111111111 
+Precision: 0.9111111111111111 
+Recall: 0.9111111111111111 
+Fisherfaces 
+Accuracy: 0.7828282828282828 
+Precision: 0.7828282828282828 
+Recall: 0.7828282828282828 
+LBPH 
+Accuracy: 0.9767676767676768 
+Precision: 0.9767676767676768 
+Recall: 0.9767676767676768 
+================================================================
+TESTE: mask 
+GRUPO: mask | FOTOS POR ALUNO: 30 
+Eigenfaces 
+Accuracy: 1.0 
+Precision: 1.0 
+Recall: 1.0 
+Fisherfaces 
+Accuracy: 1.0 
+Precision: 1.0 
+Recall: 1.0 
+LBPH 
+Accuracy: 1.0 
+Precision: 1.0 
+Recall: 1.0 
+================================================================
+TESTE: mask 
+GRUPO: mask | FOTOS POR ALUNO: 15 
+Eigenfaces 
+Accuracy: 1.0 
+Precision: 1.0 
+Recall: 1.0 
+Fisherfaces 
+Accuracy: 1.0 
+Precision: 1.0 
+Recall: 1.0 
+LBPH 
+Accuracy: 1.0 
+Precision: 1.0 
+Recall: 1.0 
+================================================================
+TESTE: mask 
+GRUPO: mask | FOTOS POR ALUNO: 10 
+Eigenfaces 
+Accuracy: 1.0 
+Precision: 1.0 
+Recall: 1.0 
+Fisherfaces 
+Accuracy: 1.0 
+Precision: 1.0 
+Recall: 1.0 
+LBPH 
+Accuracy: 1.0 
+Precision: 1.0 
+Recall: 1.0 
+================================================================
+TESTE: mask 
+GRUPO: mask | FOTOS POR ALUNO: 5 
+Eigenfaces 
+Accuracy: 1.0 
+Precision: 1.0 
+Recall: 1.0 
+Fisherfaces 
+Accuracy: 1.0 
+Precision: 1.0 
+Recall: 1.0 
+LBPH 
+Accuracy: 1.0 
+Precision: 1.0 
+Recall: 1.0 
+================================================================

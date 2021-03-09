@@ -5,7 +5,7 @@ from config import config
 
 
 def download_photos(student_id, photo_id, photo_path, photo_type):
-    main_path = "dataset"
+    main_path = "dataset/group_35"
     url = "https://ofrs-files.nyc3.digitaloceanspaces.com/photos/" + photo_path
     filename = student_id + "-" + photo_id
     response = requests.get(url, allow_redirects=True)
@@ -18,11 +18,34 @@ def download_photos(student_id, photo_id, photo_path, photo_type):
     open(f"{main_path}/{student_id}/{photo_type}/{filename}.jpg", 'wb').write(response.content)
 
 
+def download_localhost_photos(student_id, photo_id, photo_path, photo_type):
+    main_path = "dataset"
+    url = "http://localhost/files/" + photo_path
+    filename = student_id + "-" + photo_id
+    response = requests.get(url, allow_redirects=True)
+
+    if not os.path.exists(f"{main_path}/{student_id}"):
+        os.makedirs(f"{main_path}/{student_id}")
+
+    if not os.path.exists(f"{main_path}/{student_id}/{photo_type}"):
+        os.makedirs(f"{main_path}/{student_id}/{photo_type}")
+    open(f"{main_path}/{student_id}/{photo_type}/{filename}.jpg", 'wb').write(response.content)
+
+
+def download_all_photos(student_id, photo_id, photo_path, photo_type):
+    main_path = "dataset/group_all/"
+    url = "https://ofrs-files.nyc3.digitaloceanspaces.com/photos/" + photo_path
+    filename = student_id + "-" + photo_id
+    response = requests.get(url, allow_redirects=True)
+
+    open(f"{main_path}/{filename}.jpg", 'wb').write(response.content)
+
+
 def find_all_student_photos(cur, student_id):
     cur.execute(
         'SELECT photos.id, photos.path, photos."photoType" FROM photos WHERE student_id = ' + student_id)
     photos = cur.fetchall()
-    print("Download all photos from student: " + str(student_id))
+    print("Download group_all photos from student: " + str(student_id))
     for photo in photos:
         download_photos(student_id, str(photo[0]), photo[1], photo[2])
 
