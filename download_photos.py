@@ -32,7 +32,7 @@ def download_localhost_photos(student_id, photo_id, photo_path, photo_type):
     open(f"{main_path}/{student_id}/{photo_type}/{filename}.jpg", 'wb').write(response.content)
 
 
-def download_all_photos(student_id, photo_id, photo_path, photo_type):
+def download_all_photos(student_id, photo_id, photo_path):
     main_path = "dataset/group_all/"
     url = "https://ofrs-files.nyc3.digitaloceanspaces.com/photos/" + photo_path
     filename = student_id + "-" + photo_id
@@ -48,6 +48,7 @@ def find_all_student_photos(cur, student_id):
     print("Download group_all photos from student: " + str(student_id))
     for photo in photos:
         download_photos(student_id, str(photo[0]), photo[1], photo[2])
+        download_all_photos(student_id, str(photo[0]), photo[1])
 
 
 def find_all_students(cur):

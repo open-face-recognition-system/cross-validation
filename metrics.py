@@ -18,13 +18,13 @@ class MetricsCalculator:
             pred_student = self.y_pred[index]
             if correct_student != pred_student:
                 photo_id = self.photos_ids[index]
-                f = open("errors.txt", "a")
+                f = open("errors_final.txt", "a")
                 f.write(f"{pred_student}-{correct_student}-{photo_id}\n")
                 f.close()
 
         self.accuracy = accuracy_score(self.y_true, self.y_pred)
-        self.precision = precision_score(self.y_true, self.y_pred, average='micro')
-        self.recall = recall_score(self.y_true, self.y_pred, average="micro")
+        self.precision = precision_score(self.y_true, self.y_pred, average='weighted')
+        self.recall = recall_score(self.y_true, self.y_pred, average="weighted")
 
     def print_metrics(self):
         print(self.matrix)

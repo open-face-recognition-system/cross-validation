@@ -36,7 +36,7 @@ class Validator:
             print(f"Reconhecendo grupo {index}")
             self.recognize_data(data_to_recognize, str(index))
 
-        f = open("results.txt", "a")
+        f = open("results_final.txt", "a")
 
         f.write(f"TESTE: {self.test} \n")
         f.write(f"GRUPO: {self.group} | FOTOS POR ALUNO: {self.photos_size} \n")
@@ -228,7 +228,6 @@ class Validator:
 
 
 if __name__ == '__main__':
-    tests = ["stratified", "group_all", "mask"]
     groups = [35, 15, 5]
     number_of_photos_size = [30, 15, 10, 5]
 
@@ -237,9 +236,8 @@ if __name__ == '__main__':
             validator = Validator("stratified", group, student_photos_size)
             validator.validate()
 
-    for student_photos_size in number_of_photos_size:
-        validator = Validator("all", "all", student_photos_size)
-        validator.validate()
+    validator = Validator("all", "all", 30)
+    validator.validate()
 
     for student_photos_size in number_of_photos_size:
         validator = Validator("mask", "mask", student_photos_size)
