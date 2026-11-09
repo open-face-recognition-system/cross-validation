@@ -78,17 +78,21 @@ def report(test, group, photos_size, metrics):
 def main():
     parser = argparse.ArgumentParser(description="Cross-validate Vision's face recognizers")
     parser.add_argument("--seed", type=int, default=42, help="seed for sampling photos and folds")
+    parser.add_argument("--groups", type=int, nargs="+", default=[35, 15, 5], help="group sizes, in students")
     args = parser.parse_args()
 
     os.makedirs("results", exist_ok=True)
     output = f"results/{datetime.now():%Y-%m-%d-%H%M}-seed-{args.seed}.txt"
 
-    scenarios = [("stratified", group, size) for group in (35, 15, 5) for size in (30, 15, 10, 5)]
+    scenarios = [("stratified", group, size) for group in args.groups for size in (30, 15, 10, 5)]
     scenarios += [("all", "all", 30)] + [("mask", "mask", size) for size in (30, 15, 10, 5)]
 
     with open(output, "w") as results:
         results.write(f"SEED: {args.seed}\n")
         for test, group, photos_size in scenarios:
+            if not os.path.isdir(f"dataset/group_{group}"):
+                print(f"== {test} | grupo {group}: sem dataset, ignorado")
+                continue
             print(f"== {test} | grupo {group} | {photos_size} fotos por aluno")
             metrics = Validator(test, group, photos_size, seed=args.seed).validate()
             results.write(report(test, group, photos_size, metrics))
