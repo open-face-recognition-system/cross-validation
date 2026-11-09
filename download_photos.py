@@ -1,85 +1,61 @@
-import requests
-import psycopg2
+"""Download the photos of every student with a complete set (30 photos) into the dataset layout the validator reads.
+
+    DATABASE_URL=postgresql://vision:vision@localhost:5432/vision \
+    VISION_FILES_URL=http://localhost:3333/files \
+    python download_photos.py --groups 35 15 5 --seed 42
+
+Writes dataset/group_<N>/<student>/<pose>/<student>-<photo>.jpg for each group size, picking students at random,
+and dataset/group_all/<student>-<photo>.jpg with every photo. Photos are biometric data: keep them out of git.
+"""
+
+import argparse
 import os
-from config import config
+import shutil
+import urllib.request
+from random import Random
+
+import psycopg
+
+COMPLETE_STUDENTS = """
+    SELECT student_id FROM photos GROUP BY student_id HAVING COUNT(id) = 30 ORDER BY student_id
+"""
+STUDENT_PHOTOS = 'SELECT id, path, "photoType" FROM photos WHERE student_id = %s ORDER BY id'
 
 
-def download_photos(student_id, photo_id, photo_path, photo_type):
-    main_path = "dataset/group_35"
-    url = "https://ofrs-files.nyc3.digitaloceanspaces.com/photos/" + photo_path
-    filename = student_id + "-" + photo_id
-    response = requests.get(url, allow_redirects=True)
-
-    if not os.path.exists(f"{main_path}/{student_id}"):
-        os.makedirs(f"{main_path}/{student_id}")
-
-    if not os.path.exists(f"{main_path}/{student_id}/{photo_type}"):
-        os.makedirs(f"{main_path}/{student_id}/{photo_type}")
-    open(f"{main_path}/{student_id}/{photo_type}/{filename}.jpg", 'wb').write(response.content)
+def download(files_url, path, destination):
+    os.makedirs(os.path.dirname(destination), exist_ok=True)
+    with urllib.request.urlopen(f"{files_url.rstrip('/')}/{path}") as response, open(destination, "wb") as file:
+        shutil.copyfileobj(response, file)
 
 
-def download_localhost_photos(student_id, photo_id, photo_path, photo_type):
-    main_path = "dataset"
-    url = "http://localhost/files/" + photo_path
-    filename = student_id + "-" + photo_id
-    response = requests.get(url, allow_redirects=True)
+def main():
+    parser = argparse.ArgumentParser(description="Download Vision photos for cross-validation")
+    parser.add_argument("--groups", type=int, nargs="+", default=[35, 15, 5], help="group sizes, in students")
+    parser.add_argument("--seed", type=int, default=42)
+    args = parser.parse_args()
 
-    if not os.path.exists(f"{main_path}/{student_id}"):
-        os.makedirs(f"{main_path}/{student_id}")
+    files_url = os.environ["VISION_FILES_URL"]
+    with psycopg.connect(os.environ["DATABASE_URL"]) as connection:
+        students = [row[0] for row in connection.execute(COMPLETE_STUDENTS)]
+        photos = {student: connection.execute(STUDENT_PHOTOS, (student,)).fetchall() for student in students}
 
-    if not os.path.exists(f"{main_path}/{student_id}/{photo_type}"):
-        os.makedirs(f"{main_path}/{student_id}/{photo_type}")
-    open(f"{main_path}/{student_id}/{photo_type}/{filename}.jpg", 'wb').write(response.content)
+    print(f"{len(students)} alunos com 30 fotos")
+    for student, rows in photos.items():
+        for photo_id, path, _ in rows:
+            download(files_url, path, f"dataset/group_all/{student}-{photo_id}.jpg")
 
-
-def download_all_photos(student_id, photo_id, photo_path):
-    main_path = "dataset/group_all/"
-    url = "https://ofrs-files.nyc3.digitaloceanspaces.com/photos/" + photo_path
-    filename = student_id + "-" + photo_id
-    response = requests.get(url, allow_redirects=True)
-
-    open(f"{main_path}/{filename}.jpg", 'wb').write(response.content)
-
-
-def find_all_student_photos(cur, student_id):
-    cur.execute(
-        'SELECT photos.id, photos.path, photos."photoType" FROM photos WHERE student_id = ' + student_id)
-    photos = cur.fetchall()
-    print("Download group_all photos from student: " + str(student_id))
-    for photo in photos:
-        download_photos(student_id, str(photo[0]), photo[1], photo[2])
-        download_all_photos(student_id, str(photo[0]), photo[1])
+    random = Random(args.seed)
+    for size in args.groups:
+        if size > len(students):
+            print(f"Grupo de {size} ignorado: só existem {len(students)} alunos completos")
+            continue
+        for student in random.sample(students, size):
+            for photo_id, _, pose in photos[student]:
+                destination = f"dataset/group_{size}/{student}/{pose}/{student}-{photo_id}.jpg"
+                os.makedirs(os.path.dirname(destination), exist_ok=True)
+                shutil.copyfile(f"dataset/group_all/{student}-{photo_id}.jpg", destination)
+        print(f"group_{size} pronto")
 
 
-def find_all_students(cur):
-    cur.execute(
-        "SELECT students.id FROM users INNER JOIN students ON users.id = students.user_id LEFT OUTER JOIN photos on "
-        "students.id = photos.student_id GROUP BY students.id HAVING COUNT(photos.id) = 30")
-    students = cur.fetchall()
-
-    for student in students:
-        find_all_student_photos(cur, str(student[0]))
-
-
-def connect():
-    conn = None
-    try:
-        params = config()
-
-        print('Connecting to the Vision database...')
-        conn = psycopg2.connect(**params)
-        cur = conn.cursor()
-
-        find_all_students(cur)
-
-        cur.close()
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            print('Database connection closed.')
-
-
-if __name__ == '__main__':
-    connect()
+if __name__ == "__main__":
+    main()
