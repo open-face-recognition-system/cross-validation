@@ -36,6 +36,18 @@ LFW has 34 people with at least 30 photos, taken from news pictures with much mo
 | `all` | every complete student | 30, folds drawn from the whole pool |
 | `mask` | students photographed with masks | 30, 15, 10 and 5 |
 
+## LFW results (2026)
+
+`results/2026-11-09-lfw-seed-42.txt`, accuracy with 30 photos per person:
+
+| People | Eigenfaces | Fisherfaces | LBPH |
+|---|---|---|---|
+| 34 | 0.39 | 0.36 | 0.64 |
+| 15 | 0.50 | 0.60 | 0.72 |
+| 5 | 0.50 | 0.76 | 0.77 |
+
+LBPH stays ahead, but far from the 96% to 99% of 2021: LFW is much harder than classroom photos, and those numbers also carried the sampling bug. Accuracy drops as the group grows, which matters for real classes of 30 or more students.
+
 ## 2021 results
 
 `results/2021-results.txt` holds the numbers from the original study, where LBPH came out ahead (96% to 99% accuracy). They were produced before a sampling bug was fixed: each fold took one photo per pose in directory order, so "5 photos per student" used a single pose, "10" and "15" only the first two or three poses, and "30" actually used 25 photos. Runs were also unseeded. Treat those numbers as indicative only and rerun the evaluation before drawing conclusions.
