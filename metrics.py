@@ -1,10 +1,10 @@
-from sklearn.metrics import accuracy_score, recall_score, precision_score, confusion_matrix
+from sklearn.metrics import accuracy_score, confusion_matrix, precision_score, recall_score
 
 
 class MetricsCalculator:
-    def __init__(self, y_true, photos_ids, y_pred):
+    def __init__(self, y_true, photo_paths, y_pred):
         self.y_true = y_true
-        self.photos_ids = photos_ids
+        self.photo_paths = photo_paths
         self.y_pred = y_pred
         self.matrix = []
         self.accuracy = 0
@@ -13,21 +13,15 @@ class MetricsCalculator:
 
     def calculate_metrics(self):
         self.matrix = confusion_matrix(self.y_true, self.y_pred)
-
-        for index, correct_student in enumerate(self.y_true):
-            pred_student = self.y_pred[index]
-            if correct_student != pred_student:
-                photo_id = self.photos_ids[index]
-                f = open("errors_final.txt", "a")
-                f.write(f"{pred_student}-{correct_student}-{photo_id}\n")
-                f.close()
-
         self.accuracy = accuracy_score(self.y_true, self.y_pred)
-        self.precision = precision_score(self.y_true, self.y_pred, average='weighted')
-        self.recall = recall_score(self.y_true, self.y_pred, average="weighted")
+        self.precision = precision_score(self.y_true, self.y_pred, average="weighted", zero_division=0)
+        self.recall = recall_score(self.y_true, self.y_pred, average="weighted", zero_division=0)
+        return self
 
-    def print_metrics(self):
-        print(self.matrix)
-        print(f"Accuracy: {self.accuracy}")
-        print(f"Precision: {self.precision}")
-        print(f"Recall: {self.recall}")
+    def errors(self):
+        """(predicted, expected, photo path) for every misrecognized photo."""
+        return [
+            (predicted, expected, path)
+            for expected, predicted, path in zip(self.y_true, self.y_pred, self.photo_paths)
+            if expected != predicted
+        ]
