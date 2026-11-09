@@ -17,6 +17,15 @@ VISION_FILES_URL=http://localhost:3333/files \
 .venv/bin/python validator.py --seed 42   # writes results/<date>-seed-42.txt
 ```
 
+Without access to real photos, build the dataset from the public LFW dataset instead (about 200 MB, downloaded once into `dataset/.lfw-cache`):
+
+```bash
+.venv/bin/python public_dataset.py --groups 34 15 5 --seed 42
+.venv/bin/python validator.py --groups 34 15 5 --seed 42
+```
+
+LFW has 34 people with at least 30 photos, taken from news pictures with much more variation than classroom photos. It has no pose labels, so the five folders are arbitrary splits and the `mask` scenario is skipped.
+
 `download_photos.py` uses students with all 30 photos, picks each group at random with the given seed and writes them under `dataset/`, which git ignores. **Photos are biometric data**: only use them under the consent students gave and never commit them.
 
 ## Scenarios
